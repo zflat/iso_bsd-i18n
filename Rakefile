@@ -12,20 +12,6 @@ rescue Bundler::BundlerError => e
 end
 require 'rake'
 
-require 'jeweler'
-Jeweler::Tasks.new do |gem|
-  # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "devise-i18n"
-  gem.homepage = "http://github.com/tigrish/devise-i18n"
-  gem.license = "MIT"
-  gem.summary = %Q{Translations for the devise gem}
-  gem.description = %Q{Translations for the devise gem}
-  gem.email = "chris@tigrish.com"
-  gem.authors = ["Christopher Dell"]
-  # dependencies defined in Gemfile
-end
-Jeweler::RubygemsDotOrgTasks.new
-
 require 'rspec/core'
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:spec) do |spec|
@@ -41,11 +27,13 @@ rescue LoadError
   require 'rake/rdoctask'
 end
 
+require_relative './lib/iso_bsd-i18n'
+
 Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
+  version = IsoBsdI18n::VERSION
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "devise-i18n #{version}"
+  rdoc.title = "iso_bsd-i18n #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
