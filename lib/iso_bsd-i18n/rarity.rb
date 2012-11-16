@@ -12,35 +12,44 @@ module IsoBsdI18n
             355, 349, 340, 337, 203, 152,]
 
     class Division
-       def initialize(common=COMMON, uncommon=UNCOMMON, rare=RARE)
-         @common = SizeCollection.new(common)
-         @uncommon = SizeCollection.new(uncommon)
-         @rare = SizeCollection.new(rare)
-       end
+      def initialize(optns={})
+        common = optns[:common]
+        common ||= COMMON
+        
+        uncommon = optns[:uncommon]
+        uncommon ||= UNCOMMON
+        
+        rare = optns[:rare]
+        uncommon ||= RARE
+        
+        @common = SizeCollection.new(common)
+        @uncommon = SizeCollection.new(uncommon)
+        @rare = SizeCollection.new(rare)
+      end
+      
+      def common
+        @common
+      end
+      
+      def uncommon
+        @uncommon
+      end
 
-       def common
-         @common
-       end
+      def rare
+        @rare
+      end
 
-       def uncommon
-         @uncommon
-       end
+      def common?(val)
+        @common.include?(val)
+      end
+      
+      def uncommon?(val)
+        @uncommon.include?(val)
+      end
 
-       def rare
-         @rare
-       end
-
-       def common?(val)
-         @common.include?(val)
-       end
-
-       def uncommon?(val)
-         @uncommon.include?(val)
-       end
-
-       def rare?(val)
-         @rare.include?(val)
-       end
+      def rare?(val)
+        @rare.include?(val)
+      end
 
     end # class Division
 
