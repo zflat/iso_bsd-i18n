@@ -1,68 +1,11 @@
 require 'i18n'
-require 'json'
 
 module IsoBsdI18n
 
-  # Define a default rarity or allow for configuration at run time?
-  class Rarity
-
-    def initialize(common=nil, uncommon=nil, rare=nil)
-      @common = common
-      @uncommon = uncommon
-      @rare = rare
-    end
-
-    def common_list
-      @common ||= %w[630 622 559 507 406 305]
-      @common
-    end
-
-    def uncommon_list
-      @uncommon ||= %w[590 571]
-      @uncommon
-    end
-
-    def rare_list
-      @rare ||= %w[635 599 587 584 547 540 520 490 457 451 440 419 390 369 355 349 340 337 203 152]
-      @rare
-    end
-
-    def common_sizes
-      query_sizes(common_list)
-    end
-
-    def uncomon_sizes
-      query_sizes(uncommon_list)
-    end
-
-    def rare_sizes
-      query_sizes(rare_list)
-    end
-
-    def rare?(size)
-      rare_list.include? size.to_s
-    end
-
-    def common?(size)
-      common_list.include? size.to_s
-    end
-
-    def uncommon?(size)
-      uncommon_list.include? size.to_s
-    end
-
-    private
-
-    def query_sizes(list)
-      sizes = {}
-      Size.in_list(list)
-    end
-
-  end
-
-  class NoData < String
+  class AttribNoData < String
     def initialize(str = nil)
-      super(I18n.translate('errors.messages.not_applicable'))
+      str ||= I18n.translate('isobsd.messages.not_applicable')
+      super(str)
     end
     
     def capitalize
@@ -70,15 +13,32 @@ module IsoBsdI18n
     end
   end
 
+  class SizeUnknown
+    def initialize(bsd)
+      @bsd = bsd
+    end
+
+    def to_s
+      I18n.translate('isobsd.messages.unknown')
+    end
+  end
+
   class Size
 
     def initialize(bsd)
       @bsd = bsd
-      @data = I18n.translate("isobsd.sizes.#{@bsd}")
+
+      @data = (Size.unknown?(@bsd)) ?
+        SizeUnknown.new(@bsd) :
+        I18n.translate("isobsd.sizes.#{@bsd}")
+    end
+
+    def self.unknown?(val)
+      I18n.translate('isobsd.sizes').has_key?(val)
     end
 
     def unknown?
-      @data.class == String
+      @data.class == SizeUnknown
     end
 
     def to_s
@@ -106,87 +66,35 @@ module IsoBsdI18n
     end
 
     def rarity(rarity_data = nil)
-      return @rarity unless @rarity.nil?
-
-      rarity_data = Rarity.new(rarity_data) unless rarity_data.class == Rarity
-      
-      if rarity_data.rare? self
-        @rarity = I18n.translate('rarity.rare')
-      elsif rarity_data.common? self
-        @rarity =  I18n.translate('rarity.common')
-      elsif rarity_data.uncommon? self
-        @rarity = I18n.translate('rarity.uncommon')
-      else
-        @rarity = NoData.new
-      end
-
+      @rarity ||= Rarity::Value.new(@bsd, rarity_data)
       @rarity
     end
 
-    def to_h
+    def hash
       {
-          :diameter => self.diameter,
-          :app => self.app,
-          :trad => self.trad,
-          :rarity => self.rarity
-        }  
+        :diameter => self.diameter,
+        :app => self.app,
+        :trad => self.trad,
+        :rarity => self.rarity
+      }  
     end
-
-    def Size.to_h(list=nil)
-      sizes = (list.nil?) ? Size.all : Size.in_list(list)
-      Hash[sizes.map{|k,v| [k.to_s, v.to_h]}]
-    end
-
-   def Size.to_a(list=nil)
-     sizes = (list.nil?) ? Size.all : Size.in_list(list)
-     Hash[sizes.map{|k,v| [k.to_s, v.diameter]}]
-   end
-
-   def Size.to_data(list=nil)
-     sizes = (list.nil?) ? Size.all : Size.in_list(list)
-     sizes.map{|k,v| {:id=>k, :text=>v.diameter}}
-   end
-
-   def to_json(*a)
-     {
-       'json_class' => self.class.name,
-       'data' => self.to_h
-     }.to_json(*a)
-   end
 
     def Size.all
-      return @all unless @all.nil?
-
-      data = I18n.translate('isobsd.sizes')
-      @all = {}
-      data.each do |entry|      
-        size = entry[0]
-        @all[size.to_sym] = Size.new(size)
-      end
-      @all
-    end
-
-    def Size.in_list(list)
-      data = I18n.translate('isobsd.sizes')
-      set = {}
-      data.each do |key, entry|      
-        size = key
-        if list.include? (size.to_s)
-          set[size.to_sym] = Size.new(size)
-        end
-      end
-      set
+      @all ||= SizeCollection.new(I18n.translate('isobsd.sizes').keys)
+      @all 
     end
 
     private
 
+    # Lookup the attribute for the given key
     def lookup(key)
       if unknown?
-        return I18n.translate('errors.messages.unknown')
+        return @data
       else
         val = @data[key]
-        val ||= NoData.new
+        val ||= AttribNoData.new
       end
+
       # Convert multi-lined entries to an array
       if val.class == Hash
         val2 = []
@@ -198,6 +106,41 @@ module IsoBsdI18n
       return val
     end
 
-  end
+  end # class Size
+
+  class SizeCollection
+    def initialize(data=[])
+      @list = data
+    end
+
+    def sizes
+      @sizes ||= select_sizes
+      @sizes
+    end
+
+    def include?(val)
+      @list.include?(val)
+    end
+
+    def hash
+      Hash[sizes.map{|s| [s.to_i, s.hash]}]
+    end
+
+    def to_a
+      Hash[sizes.map{|s| [s.to_s, s.diameter]}]
+    end
+
+    def to_data
+      sizes.map{|s| {:id=>s.to_s, :text=>s.diameter}}
+    end
+
+    private
+
+    def select_sizes(size_data=nil)
+      size_data ||= I18n.translate('isobsd.sizes')
+      group = size_data.select{|k,v| (@list.include? k)}
+      group.map{|k,v| Size.new(k)}
+    end
+  end # class SizeCollection
 
 end

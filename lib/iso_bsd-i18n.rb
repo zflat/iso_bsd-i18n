@@ -1,5 +1,6 @@
 require 'i18n'
 require_relative 'iso_bsd-i18n/size'
+require_relative 'iso_bsd-i18n/rarity'
 
 module IsoBsdI18n
   VERSION = '0.1.0'
