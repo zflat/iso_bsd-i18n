@@ -137,12 +137,22 @@ module IsoBsdI18n
       Hash[sizes.map{|k,v| [k.to_s, v.to_h]}]
     end
 
-    def to_json(*a)
-      {
-        'json_class' => self.class.name,
-        'data' => self.to_h
-      }.to_json(*a)
-    end
+   def Size.to_a(list=nil)
+     sizes = (list.nil?) ? Size.all : Size.in_list(list)
+     Hash[sizes.map{|k,v| [k.to_s, v.diameter]}]
+   end
+
+   def Size.to_data(list=nil)
+     sizes = (list.nil?) ? Size.all : Size.in_list(list)
+     sizes.map{|k,v| {:id=>k, :text=>v.diameter}}
+   end
+
+   def to_json(*a)
+     {
+       'json_class' => self.class.name,
+       'data' => self.to_h
+     }.to_json(*a)
+   end
 
     def Size.all
       return @all unless @all.nil?
