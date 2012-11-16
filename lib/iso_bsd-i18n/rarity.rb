@@ -11,46 +11,55 @@ module IsoBsdI18n
             490, 457, 451, 440, 419, 390, 369,
             355, 349, 340, 337, 203, 152,]
 
+    module DivisionCollection
+      def self.included(base)
+        @groups.each do |gname, collection|
+          base.class.send(:def_method,gname) do 
+            @groups[gname] 
+          end
+          base.class.send(:def_method,"#{gname}?") do |bsd|
+            @groups[gname].include?(bsd)
+          end
+        end
+      end
+      
+    end
+
+    # Defining methods on the fly
+    # http://blog.jayfields.com/2008/02/ruby-dynamically-define-method.html
+    class DivisionData
+      def initialize(data)
+        @h = data
+        @h ||= {}
+        @groups = {}
+      end
+
+      def to_mod
+        h = @h
+        grps = @groups
+        Module.new do
+          h.each_pair do |gname, collection|
+            define_method gname do
+              col = grps[gname]
+              col ||= SizeCollection.new(collection)
+              col
+            end
+          end
+        end
+      end
+    end
+
     class Division
-      def initialize(optns={})
-        common = optns[:common]
-        common ||= COMMON
-        
-        uncommon = optns[:uncommon]
-        uncommon ||= UNCOMMON
-        
-        rare = optns[:rare]
-        uncommon ||= RARE
-        
-        @common = SizeCollection.new(common)
-        @uncommon = SizeCollection.new(uncommon)
-        @rare = SizeCollection.new(rare)
-      end
-      
-      def common
-        @common
-      end
-      
-      def uncommon
-        @uncommon
-      end
+      def initialize(group_list=nil)
+        group_list ||= {
+          :common => COMMON,
+          :uncommon => UNCOMMON,
+          :rare => RARE
+        }
+        @data = DivisionData.new(group_list)
 
-      def rare
-        @rare
+        self.extend @data.to_mod
       end
-
-      def common?(val)
-        @common.include?(val)
-      end
-      
-      def uncommon?(val)
-        @uncommon.include?(val)
-      end
-
-      def rare?(val)
-        @rare.include?(val)
-      end
-
     end # class Division
 
     class Value
