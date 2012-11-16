@@ -44,6 +44,12 @@ module IsoBsdI18n
               col ||= SizeCollection.new(collection)
               col
             end
+
+            define_method "#{gname}?" do |bsd|
+              col = grps[gname]
+              col ||= SizeCollection.new(collection)
+              col.include?(bsd)
+            end
           end
         end
       end
