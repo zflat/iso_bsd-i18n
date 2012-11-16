@@ -1,5 +1,3 @@
-#require 'rails'
-
 module IsoBsdI18n
   VERSION = '0.1.0'
 
