@@ -62,6 +62,16 @@ module IsoBsdI18n
       end
     end # class Division
 
+
+    #TODO define methods on the fly
+    class ValueData
+      def initizlize(bsd)
+
+      end
+      
+    end
+
+
     class Value
       def initialize(bsd, division=nil)
         @bsd = bsd
