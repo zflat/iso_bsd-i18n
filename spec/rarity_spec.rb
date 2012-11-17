@@ -2,9 +2,50 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 require 'iso_bsd-i18n'
 module IsoBsdI18n
+
+  describe Rarity do
+    describe "the default division" do
+      after(:each) do
+        Rarity::default_division=nil
+      end
+      it "should not be nil" do
+        Rarity::default_division.should_not be_nil
+      end
+
+      it "should be settable" do
+        h = {:test=>[100]}
+        Rarity::default_division = h
+        Rarity::default_division.should == h
+      end
+
+      it "should be resettable" do
+        h = {:test=>[100]}
+        h_initial = Rarity::default_division
+        Rarity::default_division = h
+        Rarity::default_division = nil
+        Rarity::default_division.should == h_initial
+      end
+    end
+  end
+
+
   describe Rarity::Division  do
 
-    describe "a new division" do
+    describe "a customized division" do
+      before(:all) do
+        @list = {:common => [630], :uncommon => [622], :rare => [590]}
+        @division = Rarity::Division.new(@list)
+      end
+
+      it "should have common, uncommon and rare matching custom list" do
+        @division.common.sizes.length.should == @list[:common].length
+        @division.uncommon.sizes.length.should == @list[:uncommon].length
+        @division.rare.sizes.length.should == @list[:rare].length
+      end
+    end
+
+
+    describe "a default division" do
       before(:each) do
         @d = Rarity::Division.new
       end

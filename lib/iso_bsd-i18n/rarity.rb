@@ -11,13 +11,28 @@ module IsoBsdI18n
             490, 457, 451, 440, 419, 390, 369,
             355, 349, 340, 337, 203, 152,]
 
+    def self.default_division
+      @default_division ||= {
+          :common => COMMON,
+          :uncommon => UNCOMMON,
+          :rare => RARE
+        }
+      @default_division
+    end
+
+    # Can be used to configure a different
+    # default to use to specify rarity divisions
+    def self.default_division=(h)
+      @default_division = h
+    end
+
     # Defining methods on the fly
     # http://blog.jayfields.com/2008/02/ruby-dynamically-define-method.html
     class DivisionData
       def initialize(data)
         @h = data
         @h ||= {}
-        @groups = {}
+        @groups = {} # holder for memoizing
       end
 
       def to_mod
@@ -28,7 +43,8 @@ module IsoBsdI18n
             define_method gname do
               col = grps[gname]
               col ||= SizeCollection.new(collection)
-              col
+              puts col.sizes
+              grps[gname] = col
             end
 
             define_method "#{gname}?" do |bsd|
@@ -43,11 +59,8 @@ module IsoBsdI18n
 
     class Division
       def initialize(group_list=nil)
-        group_list ||= {
-          :common => COMMON,
-          :uncommon => UNCOMMON,
-          :rare => RARE
-        }
+        group_list ||= Rarity::default_division
+
         @data = DivisionData.new(group_list)
 
         self.extend @data.to_mod
