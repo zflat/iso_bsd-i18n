@@ -11,20 +11,6 @@ module IsoBsdI18n
             490, 457, 451, 440, 419, 390, 369,
             355, 349, 340, 337, 203, 152,]
 
-    module DivisionCollection
-      def self.included(base)
-        @groups.each do |gname, collection|
-          base.class.send(:def_method,gname) do 
-            @groups[gname] 
-          end
-          base.class.send(:def_method,"#{gname}?") do |bsd|
-            @groups[gname].include?(bsd)
-          end
-        end
-      end
-      
-    end
-
     # Defining methods on the fly
     # http://blog.jayfields.com/2008/02/ruby-dynamically-define-method.html
     class DivisionData
