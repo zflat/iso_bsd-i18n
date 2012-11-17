@@ -45,7 +45,7 @@ module IsoBsdI18n
     end
 
 
-    describe "a default division" do
+    describe "a (default) division" do
       before(:each) do
         @d = Rarity::Division.new
       end
@@ -81,6 +81,20 @@ module IsoBsdI18n
 
           it "should have array elements of type Size" do
             @sizes.first.class.should == Size.new(0).class
+          end
+
+          it "should have rarity that evaluate to be common" do
+            @sizes.first.rarity.should be_common
+          end
+
+          it "should not have rarity that evaluates to rare or uncommon" do
+            @sizes.first.rarity.should_not be_rare
+            @sizes.first.rarity.should_not be_uncommon
+          end
+
+          it "should map to the 'common' label" do
+            str = @sizes.first.rarity.to_s
+            str.should == I18n.translate('isobsd.rarity.common')
           end
         end # describe "sizes"
       end # describe "common"

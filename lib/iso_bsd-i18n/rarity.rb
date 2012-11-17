@@ -43,7 +43,6 @@ module IsoBsdI18n
             define_method gname do
               col = grps[gname]
               col ||= SizeCollection.new(collection)
-              puts col.sizes
               grps[gname] = col
             end
 
