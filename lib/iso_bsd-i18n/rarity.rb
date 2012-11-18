@@ -91,7 +91,7 @@ module IsoBsdI18n
         elsif self.uncommon?
           @str = I18n.translate('isobsd.rarity.uncommon')
         elsif self.rare?
-          @str = I18n.translate('isobsd.rarity.common')
+          @str = I18n.translate('isobsd.rarity.rare')
         else
           @str = AttribNoData.new
         end
