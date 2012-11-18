@@ -13,13 +13,10 @@ module IsoBsdI18n
     end
   end
 
-  class SizeUnknown
+  class SizeUnknown < String
     def initialize(bsd)
       @bsd = bsd
-    end
-
-    def to_s
-      I18n.translate('isobsd.messages.unknown')
+      super(I18n.translate('isobsd.messages.unknown'))
     end
   end
 
@@ -27,18 +24,14 @@ module IsoBsdI18n
 
     def initialize(bsd)
       @bsd = bsd
-
-      @data = (Size.unknown?(@bsd)) ?
-        SizeUnknown.new(@bsd) :
-        I18n.translate("isobsd.sizes.#{@bsd}")
     end
 
     def self.unknown?(val)
-      I18n.translate('isobsd.sizes').has_key?(val)
+      !I18n.translate('isobsd.sizes').has_key?(val)
     end
 
     def unknown?
-      @data.class == SizeUnknown
+      Size.unknown?(@bsd)
     end
 
     def to_s
@@ -75,7 +68,7 @@ module IsoBsdI18n
         :diameter => self.diameter,
         :app => self.app,
         :trad => self.trad,
-        :rarity => self.rarity
+        :rarity => self.rarity.to_s
       }  
     end
 
@@ -89,21 +82,23 @@ module IsoBsdI18n
     # Lookup the attribute for the given key
     def lookup(key)
       if unknown?
-        return @data
-      else
-        val = @data[key]
-        val ||= AttribNoData.new
+        return data
       end
+
+      val = data[key]
+      val ||= AttribNoData.new
 
       # Convert multi-lined entries to an array
       if val.class == Hash
-        val2 = []
-        val.each do |k,v|
-          val2 << v
-        end
-        val = val2
+        val = val.values
       end
+
       return val
+    end
+
+    def data
+      @data ||= (unknown?) ? SizeUnknown.new(@bsd) : I18n.translate("isobsd.sizes")[@bsd]
+      @data
     end
 
   end # class Size
