@@ -13,17 +13,165 @@ en:
       635:
         :trad: 
           1: 28 x 1 1/2
-          2: 700b
+          2: 700 B
         :app: rod-brake roadsters
-      622:
-        :trad: 700c
-        :app: newer road wheels
       630:
         :trad: 27 x anything
+        :app: older road bikes
+      622:
+        :trad:
+          1: 700 C
+          2: 28 x (two fractions)
+          1: 29 inch
+          2: 28 x 1 1/2 F.13 Canada
+        :app: 
+          1: newer road bikes
+          2: 29er mountain bikes
+      599:
+        :trad: 
+          1: 26 x 1.25
+          2: 26 x 1.375
+        :app: Very old U.S. lightweights 
+      597:
+        :trad: 
+          1: 26 x 1 1/4
+          2: 26 x 1 3/8 (S-6)
+        :app:
+          1: older British sports and club bikes
+          2: Schwinn lightweights
       590:
         :trad:
           1: 26 x 1 3/8 (E.A.3)
           2: 650 A 
         :app:
           1: most English 3-speeds
-          2: department-store or juvenile 10 speeds 
+          2: department-store or juvenile 10 speeds
+      587:
+        :trad: 700 D
+        :app: Oddball size formerly used on some GT models. 
+      584:
+        :trad: 
+          1: 650 B
+          2: 26 x 1 1/2
+        :app: 
+          1: French utility bikes
+          2: tandems and loaded-touring
+          3: some older Raleigh
+          3: Schwinn mountain bikes
+      571:
+        :trad: 
+          1: 26 x 1
+          2: 26 x 1 3/4
+          3: 650 C
+        :app: 
+          1: triathalon
+          2: time trial
+          3: high performace road bikes for smaller riders
+      559:
+        :trad: 26 x 1.00- x 2.125 
+        :app: 
+          1: most mountain bikes
+          2: cruisers
+      547:
+        :trad: 
+          1: 24 x 1 1/4
+          2: 24 x 1 3/8 (S-5)
+        :app: 
+          1: British or Schwinn juvenile
+          2: Schwinn juvenile lightweights
+      540:
+        :trad: 
+          1: 24 x 1 1/8
+          2: 24 x 1 3/8 (E.5)
+          2: 600 A
+        :app: 
+          1: British juvenile
+          2: most wheelchairs
+      520:
+        :trad: 
+          1: 24 x 1
+          2: 24 x 1 1/8
+        :app: 
+          1: high performance wheels for smaller riders 
+          2: Terry front
+      507:
+        :trad: 24 x 1.5- x 2.125  
+        :app:
+          1: juevenile mountain bikes
+          2: cruisers
+      490:
+        :trad: 550 A 
+        :app: European Juvenile road bikes 
+      457:
+        :trad: 
+          1: 22 x 1.75
+          2: 22 x 2.125
+        :app: juvenile
+      451:
+        :trad: 
+          1: 20 x 1 1/8
+          2: 20 x 1 1/4
+          3: 20 x 1 3/8
+        :app: 
+          1: juevenile lightweights
+          2: BMX for light riders
+          3: some recumbents
+      440:
+        :trad: 500 A 
+        :app:  European Juvenile, folding 
+      419:
+        :trad: 20 x 1 3/4 
+        :app:  Schwinn juvenile 
+      406:
+        :trad: 20 x 1.5- x 2.125 
+        :app:  
+          0: most BMX
+          1: juevenile
+          2: folders
+          3: trailers
+          4: some recumbents
+      390:
+        :trad: 450 A 
+        :app: European Juvenile 
+      369:
+        :trad: 17 x 1 1/4 
+        :app:  Alex Moulton AM series 
+      355:
+        :trad: 18 x 1.5- x 2.125 
+        :app: 
+          1: Birdy folding bikes
+          2: juevenile
+      349:
+        :trad: 16 x 1 3/8 
+        :app:  
+          1: older Moulton
+          2: Brompton & other folders
+          3: recumbent front
+          4: juvenil
+      340:
+        :trad: 400 A
+        :app: European Juvenile 
+      337:
+        :trad: 16 x 1 3/8
+        :app:  Polish juvenile
+      317:
+        :trad: 16 x 1 3/4  
+        :app: Schwinn juvenile 
+      305:
+        :trad: 16 x 1.75- x 2.125 
+        :app: 
+          1: juevenile
+          2: folders
+          3: trailers
+          4: some recumbents
+      203:
+        :trad: 12 1/2 x anything
+        :app:
+          1: juevenile
+          2: scooters
+      152:
+        :trad: 10 x 2
+        :app:  weelchair
+      137:
+        :trad: 8 x 1 1/4
+        :app:  wheelchair
