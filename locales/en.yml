@@ -11,7 +11,7 @@ en:
       :uncommon: uncommmon
     :sizes:
       635:
-        :trad: 
+        :trad:
           1: 28 x 1 1/2
           2: 700 B
         :app: rod-brake roadsters
@@ -19,21 +19,21 @@ en:
         :trad: 27 x anything
         :app: older road bikes
       622:
-        :trad:
+        :trad: 
           1: 700 C
           2: 28 x (two fractions)
-          1: 29 inch
-          2: 28 x 1 1/2 F.13 Canada
+          3: 29 inch
+          4: 28 x 1 1/2 F.13 Canada
         :app: 
           1: newer road bikes
           2: 29er mountain bikes
       599:
-        :trad: 
+        :trad:
           1: 26 x 1.25
           2: 26 x 1.375
         :app: Very old U.S. lightweights 
       597:
-        :trad: 
+        :trad:
           1: 26 x 1 1/4
           2: 26 x 1 3/8 (S-6)
         :app:
@@ -57,7 +57,7 @@ en:
           1: French utility bikes
           2: tandems and loaded-touring
           3: some older Raleigh
-          3: Schwinn mountain bikes
+          4: Schwinn mountain bikes
       571:
         :trad: 
           1: 26 x 1
@@ -83,7 +83,7 @@ en:
         :trad: 
           1: 24 x 1 1/8
           2: 24 x 1 3/8 (E.5)
-          2: 600 A
+          3: 600 A
         :app: 
           1: British juvenile
           2: most wheelchairs
@@ -166,7 +166,7 @@ en:
           4: some recumbents
       203:
         :trad: 12 1/2 x anything
-        :app:
+        :app: 
           1: juevenile
           2: scooters
       152:
