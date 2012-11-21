@@ -32,7 +32,7 @@ http://www.sheldonbrown.com/tire-sizing.html#isoetrto
         s.rarity(my_divisions).common?
         
         # Override default rarity divisions
-        Raridy::default_division = my_divisions
+        Rarity::default_division = my_divisions
 
 # License
 
