@@ -5,11 +5,11 @@ module IsoBsdI18n
 
   module Rarity
 
-    COMMON = [630, 622, 559, 507, 406, 305] 
-    UNCOMMON = [590, 571]
+    COMMON = [630, 622, 559, 507, 406, 305] unless defined?(COMMON)
+    UNCOMMON = [590, 571] unless defined?(UNCOMMON)
     RARE = [635, 599, 587, 584, 547, 540, 520,
             490, 457, 451, 440, 419, 390, 369,
-            355, 349, 340, 337, 203, 152,]
+            355, 349, 340, 337, 203, 152,] unless defined?(RARE)
 
     def self.default_division
       @default_division ||= {
@@ -32,7 +32,7 @@ module IsoBsdI18n
       def initialize(data)
         @h = data
         @h ||= {}
-        @groups = {} # holder for memoizing
+        @groups = {} # holder for caching
       end
 
       def to_mod
@@ -79,7 +79,8 @@ module IsoBsdI18n
     class Value
       def initialize(bsd, division=nil)
         @bsd = bsd
-        @division = division
+        @division = division if division.class == Division
+        @division = Division.new(division) if division.class == Hash
         @division ||= Division.new
       end
 
