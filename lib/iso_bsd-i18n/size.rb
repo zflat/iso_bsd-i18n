@@ -46,8 +46,13 @@ module IsoBsdI18n
       @bsd.to_i
     end
 
+    def <=>(other)
+      self.to_i <=> other.to_i
+    end
+
     def diameter
-      "#{@bsd}mm"
+      @diam ||= "#{@bsd}mm"
+      @diam
     end
 
     def trad
@@ -59,8 +64,13 @@ module IsoBsdI18n
     end
 
     def rarity(rarity_data = nil)
-      @rarity ||= Rarity::Value.new(@bsd, rarity_data)
-      @rarity
+      if rarity_data.nil?
+        # Only cache when default rarity being used
+        @rarity ||= Rarity::Value.new(@bsd, rarity_data)
+        return @rarity
+      else
+        return Rarity::Value.new(@bsd, rarity_data)
+      end
     end
 
     def hash
@@ -104,6 +114,9 @@ module IsoBsdI18n
   end # class Size
 
   class SizeCollection
+
+    include Enumerable
+
     def initialize(data=[])
       @list = data
     end
@@ -113,18 +126,31 @@ module IsoBsdI18n
       @sizes
     end
 
+    def each
+      self.sizes.each do |s|
+        yield s
+      end
+    end
+
     def include?(val)
       @list.include?(val)
     end
 
+    # Returns a hash of structure
+    # { bsd => {:diameter => "diameter", ... , :rarity => "rarity"}, ... }
     def hash
       Hash[sizes.map{|s| [s.to_i, s.hash]}]
     end
 
-    def to_a
+    # Returns a hash of structure
+    # {"bsd" => "diameter", ...}
+    # example: {"622" => "622mm", ... }
+    def labels
       Hash[sizes.map{|s| [s.to_s, s.diameter]}]
     end
 
+    # Returns an array of hashes structured as
+    # [{:id=>"bsd", :text=>"diameter"}, ... ]
     def to_data
       sizes.map{|s| {:id=>s.to_s, :text=>s.diameter}}
     end

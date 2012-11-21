@@ -18,17 +18,17 @@ module IsoBsdI18n
       end
     end
 
-    describe "all.sizes" do
-      it "should be an array" do
-        Size.all.sizes.class.should == [].class
+    describe "all" do
+      it "should be a collection" do
+        Size.all.class.should == SizeCollection
       end
 
-      it "should contain Size elements in the array" do
-        Size.all.sizes.first.class.should == Size.new(0).class
+      it "should contain Size elements in the collection" do
+        Size.all.first.class.should == Size
       end
       
       it "should have sizes with known attributes" do
-        size = Size.all.sizes.first
+        size = Size.all.first
         u_class = SizeUnknown.new(size.to_i).class
 
         size.diameter.class.should_not == u_class
