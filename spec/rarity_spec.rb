@@ -33,7 +33,7 @@ module IsoBsdI18n
     it "should allow for custom division data" do
       s = Size.all.first
       my_div_data = {:common => [s.to_i], :uncommon => [], :rare => []}
-
+      s.rarity(my_div_data).should be_common
 
       my_div = Rarity::Division.new({:common => [s.to_i], :uncommon => [], :rare => []})
       my_div.class.should == Rarity::Division
