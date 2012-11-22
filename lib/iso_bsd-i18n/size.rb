@@ -7,7 +7,7 @@ module IsoBsdI18n
       str ||= I18n.translate('isobsd.messages.not_applicable')
       super(str)
     end
-    
+
     def capitalize
       self.to_s
     end
@@ -22,18 +22,30 @@ module IsoBsdI18n
 
   class Size
 
+    # @param [Integer] bsd
+    # 
     def initialize(bsd)
       @bsd = bsd
     end
 
+    # Test if the given BSD value maps to known size data
+    # 
+    # @param [Integer, #to_i] val
+    # 
+    # @return [Boolean]
     def self.unknown?(val)
-      !I18n.translate('isobsd.sizes').has_key?(val)
+      !I18n.translate('isobsd.sizes').has_key?(val.to_i)
     end
 
+    # Test if this size is unknown
+    # 
+    # @return [Boolean]
     def unknown?
       Size.unknown?(@bsd)
     end
 
+    # @return [String] The bsd as string.
+    #
     def to_s
       @bsd.to_s
     end
@@ -42,6 +54,9 @@ module IsoBsdI18n
       @bsd.to_s.to_sym
     end
 
+
+    # @return [Integer] The bsd for this size.
+    # 
     def to_i
       @bsd.to_i
     end
@@ -50,19 +65,29 @@ module IsoBsdI18n
       self.to_i <=> other.to_i
     end
 
+    # @return [String] The bsd and units like 622mm
+    #
     def diameter
       @diam ||= "#{@bsd}mm"
       @diam
     end
 
+    # Traditional name or names of this size
+    # @return [String, Array] 
     def trad
       lookup(:trad)
     end
 
+    # Appliication(s) of this size
+    # @return [String, Array]
     def app
       lookup(:app)
     end
 
+    # Rarity of the size given rarity divisions
+    #
+    # @param [Division, #each_pair] rarity_data rarity classifications
+    # 
     def rarity(rarity_data = nil)
       if rarity_data.nil?
         # Only cache when default rarity being used
@@ -73,6 +98,9 @@ module IsoBsdI18n
       end
     end
 
+    # Provides a hash containing all attributes
+    # 
+    # @return [Hash] of size attributes
     def hash
       {
         :diameter => self.diameter,
@@ -82,6 +110,7 @@ module IsoBsdI18n
       }  
     end
 
+    # @return [Array] All size information in an Array of Size objects
     def Size.all
       @all ||= SizeCollection.new(I18n.translate('isobsd.sizes').keys)
       @all 
@@ -90,6 +119,10 @@ module IsoBsdI18n
     private
 
     # Lookup the attribute for the given key
+    # Returns an Array if multiple values map the the attribute
+    #
+    # @param [Symbol] key Attribute to lookup
+    # @return [String, Array]
     def lookup(key)
       if unknown?
         return data
@@ -106,6 +139,8 @@ module IsoBsdI18n
       return val
     end
 
+    # Wrapper for the I18n::translate call to retrieve wheel size data
+    # @return [Hash] 
     def data
       @data ||= (unknown?) ? SizeUnknown.new(@bsd) : I18n.translate("isobsd.sizes")[@bsd]
       @data
@@ -117,12 +152,16 @@ module IsoBsdI18n
 
     include Enumerable
 
+    # @param [Array] data List of sizes to include in the collection
     def initialize(data=[])
       @list = data
     end
 
+    # Array of size objects in the collection
+    # 
+    # @return [Array]
     def sizes
-      @sizes ||= select_sizes
+      @sizes ||= select_sizes(@list)
       @sizes
     end
 
@@ -132,35 +171,48 @@ module IsoBsdI18n
       end
     end
 
+    # Test if the given size is in the collection
+    #
+    # @param [Size, #==] val
+    #
+    # @return [Boolean]
     def include?(val)
       @list.include?(val)
     end
 
-    # Returns a hash of structure
-    # { bsd => {:diameter => "diameter", ... , :rarity => "rarity"}, ... }
+    # A nested hash of structure
+    # { size.diameter => size.hash ,... }
+    # 
+    # @return (Hash) 
     def hash
       Hash[sizes.map{|s| [s.to_i, s.hash]}]
     end
 
-    # Returns a hash of structure
-    # {"bsd" => "diameter", ...}
-    # example: {"622" => "622mm", ... }
+    # Hash of structure
+    # {size.bsd => size.diameter, ... }
+    #
+    #  @return [Hash]
     def labels
       Hash[sizes.map{|s| [s.to_s, s.diameter]}]
     end
 
-    # Returns an array of hashes structured as
-    # [{:id=>"bsd", :text=>"diameter"}, ... ]
+    # Array of size.hash
+    # 
+    # @return [Array]
     def to_data
       sizes.map{|s| {:id=>s.to_s, :text=>s.diameter}}
     end
 
     private
 
-    def select_sizes(size_data=nil)
+    # @param [Array] targets List of sizes to include
+    # @param [Hash] size_data Data set to build Size objects from
+    # @return [Array] of Size objects
+    def select_sizes(targets=nil,size_data=nil)
       size_data ||= I18n.translate('isobsd.sizes')
-      group = size_data.select{|k,v| (@list.include? k)}
-      group.map{|k,v| Size.new(k)}
+      group = size_data.select{|k,v| (targets.include? k)} unless targets.nil?
+      group ||= size_data
+      group.keys.map{|k| Size.new(k)}
     end
   end # class SizeCollection
 

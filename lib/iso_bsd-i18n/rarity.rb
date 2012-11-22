@@ -57,11 +57,11 @@ module IsoBsdI18n
     end
 
     class Division
+      
+      # @param [Hash, #each_pair] group_list Hash mapping division to array of sizes in the division
       def initialize(group_list=nil)
         group_list ||= Rarity::default_division
-
         @data = DivisionData.new(group_list)
-
         self.extend @data.to_mod
       end
     end # class Division
@@ -77,10 +77,13 @@ module IsoBsdI18n
 
 
     class Value
+      
+      # @param [Integer] bsd
+      # @param [Division, #each_pair] division rarity classifications
       def initialize(bsd, division=nil)
         @bsd = bsd
         @division = division if division.class == Division
-        @division = Division.new(division) if division.class == Hash
+        @division = Division.new(division) if division.respond_to?(:each_pair)
         @division ||= Division.new
       end
 
