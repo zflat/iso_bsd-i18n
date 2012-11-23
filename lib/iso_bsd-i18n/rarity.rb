@@ -4,8 +4,11 @@ require_relative 'division'
 
 module IsoBsdI18n
 
+  # Classify Size instances based on rarity.
+  # Used to help distinguish similar sizes.
+  # 
   module Rarity
-    
+
     COMMON = [630, 622, 559, 507, 406, 305] unless defined?(COMMON)
     UNCOMMON = [590, 571] unless defined?(UNCOMMON)
     RARE = [635, 599, 587, 584, 547, 540, 520,
@@ -49,56 +52,66 @@ module IsoBsdI18n
       }
     end
 
+    # Rarity value object to be used as an attribute to Size instances
+    # 
     class Value
       
       # @param [Integer] bsd
       # @param [Division, #each_pair] division rarity classifications
       def initialize(bsd, division=nil)
         @bsd = bsd
-        @division = division if division.class == Division
-        @division ||= Division.new(division) if division.respond_to?(:each_pair)
-        @division ||= Rarity::default_division
+        self.division=division
+        @data = ValueData.new(@bsd, @division)
+        self.extend @data.to_mod
       end
 
+      # @return [String] Translated rarity
       def to_s
         return @str unless @str.nil?
-
-        if self.common?
-          @str = I18n.translate('isobsd.rarity.common')
-        elsif self.uncommon?
-          @str = I18n.translate('isobsd.rarity.uncommon')
-        elsif self.rare?
-          @str = I18n.translate('isobsd.rarity.rare')
-        else
-          @str = AttribNoData.new
+        
+        @division.hash.keys.each do |k|
+          if self.send("#{k}?")
+            @str = I18n.translate("isobsd.rarity.#{k}")
+          end
         end
+        @str ||= AttribNoData.new
 
         @str
       end
 
-      def common?
-        @is_common ||= @division.common? @bsd
-        @is_common
-      end
-
-      def uncommon?
-        @is_uncommon ||= @division.uncommon? @bsd
-        @is_uncommon
-      end
-
-      def rare?
-        @is_rare ||= @division.rare? @bsd
-        @is_rare
-      end
-
       private 
 
-      #TODO define methods on the fly
+      # Initialize the Division object used to test for rarity
+      # 
+      def division=(div)
+        @division = div if div.class == Division
+        @division ||= Division.new(div) if div.respond_to?(:each_pair)
+        @division ||= Rarity::default_division
+      end
+
+      # Defining methods on the fly for Value instances
       class ValueData
-        def initizlize(bsd)
-          
+        def initialize(bsd, division)
+          @diameter = bsd
+          @div = division
+          @membership = {}
         end
-      
+
+        # @return [Module] A Value instance extends on initialization
+        def to_mod
+          div = @div
+          h = div.hash
+          diam = @diameter
+          mem = @membership
+          Module.new do
+            h.each_pair do |gname, collection|
+              define_method "#{gname}?" do
+                mem[gname] ||= div.send("#{gname}?", diam)
+                mem[gname]
+              end
+            end # h.each_pair do
+          end
+        end
       end # class ValueData
       
     end # class Value

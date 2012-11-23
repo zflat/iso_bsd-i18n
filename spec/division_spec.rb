@@ -16,6 +16,12 @@ module IsoBsdI18n
         @division.uncommon.sizes.length.should == @list[:uncommon].length
         @division.rare.sizes.length.should == @list[:rare].length
       end
+
+      describe "#hash" do
+        it "should produce the original list" do
+          @division.hash.should == @list
+        end
+      end
     end
 
   end # describe Division

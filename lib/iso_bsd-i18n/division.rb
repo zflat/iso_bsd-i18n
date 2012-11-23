@@ -13,6 +13,7 @@ module IsoBsdI18n
         self.extend @data.to_mod
       end
 
+      # @return [Hash] 
       def hash
         @raw_groups
       end
@@ -23,7 +24,7 @@ module IsoBsdI18n
 
       private
 
-      # Defining methods on the fly
+      # Defining methods on the fly for Division instances
       # http://blog.jayfields.com/2008/02/ruby-dynamically-define-method.html
       class DivisionData
         def initialize(data)
