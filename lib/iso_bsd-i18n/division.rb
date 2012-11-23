@@ -7,10 +7,18 @@ module IsoBsdI18n
     class Division
       
       # @param [Hash, #each_pair] group_list Hash mapping division to array of sizes in the division
-      def initialize(group_list=nil)
-        group_list ||= Rarity::default_division
-        @data = DivisionData.new(group_list)
+      def initialize(group_list)
+        @raw_groups = group_list
+        @data = DivisionData.new(@raw_groups)
         self.extend @data.to_mod
+      end
+
+      def hash
+        @raw_groups
+      end
+
+      def == (other)
+        @raw_groups == other.hash
       end
 
       private
