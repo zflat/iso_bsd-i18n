@@ -10,10 +10,10 @@ module IsoBsdI18n
   module Rarity
 
     COMMON = [630, 622, 559, 507, 406, 305] unless defined?(COMMON)
-    UNCOMMON = [590, 571] unless defined?(UNCOMMON)
+    UNCOMMON = [590, 597, 571] unless defined?(UNCOMMON)
     RARE = [635, 599, 587, 584, 547, 540, 520,
             490, 457, 451, 440, 419, 390, 369,
-            355, 349, 340, 337, 203, 152,] unless defined?(RARE)
+            355, 349, 340, 337, 317, 203, 152, 137] unless defined?(RARE)
 
     # The Division object used to classify size rarity.
     # Used by default when explicit division is not specifed
