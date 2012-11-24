@@ -27,8 +27,17 @@ module IsoBsdI18n
         Rarity::default_division = nil
         Rarity::default_division.should == h_initial
       end
-    end
-  end
+    end #describe default_division
+
+    describe "#get" do
+      it "should have a get for each group" do
+        h = Rarity::default_division_raw
+        h.each_key do |k|
+          Rarity::get(k).should_not be_nil
+        end
+      end
+    end #describe getters
+  end #describe Rarity
 
   describe Rarity::Value do
     

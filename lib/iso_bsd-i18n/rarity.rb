@@ -52,6 +52,16 @@ module IsoBsdI18n
       }
     end
 
+    # Get the sizes of the given rarity
+    # 
+    # @params [Symbol, String] rarity
+    # @params [Division] division
+    # @return [SizeCollection]
+    def self.get(rarity, division=nil)
+      division ||= default_division
+      division.send(rarity)
+    end
+
     # Rarity value object to be used as an attribute to Size instances
     # 
     class Value
