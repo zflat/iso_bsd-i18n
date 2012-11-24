@@ -77,101 +77,101 @@ es:
           1: 24 x 1 1/4
           2: 24 x 1 3/8 (S-5)
         :app: 
-          1: British or Schwinn juvenile
-          2: Schwinn juvenile lightweights
+          1: Británico o juvenil Schwinn
+          2: Schwinn menores pesos ligeros
       540:
         :trad: 
           1: 24 x 1 1/8
           2: 24 x 1 3/8 (E.5)
           3: 600 A
         :app: 
-          1: British juvenile
-          2: most wheelchairs
+          1: Británico juvenil
+          2: la mayoría de las sillas de ruedas
       520:
         :trad: 
           1: 24 x 1
           2: 24 x 1 1/8
         :app: 
           1: high performance wheels for smaller riders 
-          2: Terry front
+          2: ruedas de alto rendimiento para los pequeños jinetes
       507:
         :trad: 24 x 1.5- x 2.125  
         :app:
-          1: juevenile mountain bikes
-          2: cruisers
+          1: bicicletas de montaña juveniles
+          2: cruceros
       490:
         :trad: 550 A 
-        :app: European Juvenile road bikes 
+        :app: bicicletas de carretera Europeos juveniles
       457:
         :trad: 
           1: 22 x 1.75
           2: 22 x 2.125
-        :app: juvenile
+        :app: juvenil
       451:
         :trad: 
           1: 20 x 1 1/8
           2: 20 x 1 1/4
           3: 20 x 1 3/8
         :app: 
-          1: juevenile lightweights
-          2: BMX for light riders
-          3: some recumbents
+          1: pesos ligeros juveniles
+          2: BMX para los jinetes ligeros
+          3: algunas bicicletas reclinadas
       440:
         :trad: 500 A 
-        :app:  European Juvenile, folding 
+        :app:  Europeo juvenil, plegable
       419:
         :trad: 20 x 1 3/4 
-        :app:  Schwinn juvenile 
+        :app:  Schwinn juvenil 
       406:
         :trad: 20 x 1.5- x 2.125 
         :app:  
-          0: most BMX
-          1: juevenile
-          2: folders
-          3: trailers
-          4: some recumbents
+          0: mayoría BMX
+          1: juvenil
+          2: plegables
+          3: remolques
+          4: algunas bicicletas reclinadas
       390:
         :trad: 450 A 
-        :app: European Juvenile 
+        :app: Europeo juvenil
       369:
         :trad: 17 x 1 1/4 
-        :app:  Alex Moulton AM series 
+        :app:  Alex Moulton serie AM
       355:
         :trad: 18 x 1.5- x 2.125 
         :app: 
-          1: Birdy folding bikes
-          2: juevenile
+          1: Birdy bicicletas plegables
+          2: juvenil
       349:
         :trad: 16 x 1 3/8 
         :app:  
-          1: older Moulton
-          2: Brompton & other folders
-          3: recumbent front
+          1: más viejo Moulton
+          2: Brompton y otras plegables
+          3: frente reclinada
           4: juvenil
       340:
         :trad: 400 A
-        :app: European Juvenile 
+        :app: Europeo juvenil
       337:
         :trad: 16 x 1 3/8
-        :app:  Polish juvenile
+        :app:  Polaco juvenil
       317:
         :trad: 16 x 1 3/4  
-        :app: Schwinn juvenile 
+        :app: Schwinn juvenil 
       305:
         :trad: 16 x 1.75- x 2.125 
         :app: 
-          1: juevenile
-          2: folders
-          3: trailers
-          4: some recumbents
+          1: juvenil
+          2: plegables
+          3: remolques
+          4: algunas bicicletas reclinadas
       203:
         :trad: 12 1/2 x anything
         :app: 
-          1: juevenile
+          1: juvenil
           2: scooters
       152:
         :trad: 10 x 2
-        :app:  weelchair
+        :app:  silla de ruedas
       137:
         :trad: 8 x 1 1/4
-        :app:  wheelchair
+        :app:  silla de ruedas
