@@ -26,7 +26,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency(%q<bundler>, ["~> 1.2"])
   s.add_development_dependency(%q<i18n-spec>, [">= 0"])
   s.add_development_dependency(%q<i18n>, [">= 0"])
-  s.add_development_dependency(%q<i18n-js>, [">= 0"])
 
   s.add_dependency(%q<bundler>, ["~> 1.2"])
   s.add_dependency(%q<i18n>, [">= 0"])
