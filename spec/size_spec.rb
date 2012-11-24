@@ -37,5 +37,18 @@ module IsoBsdI18n
       end
     end
 
+    describe "SizeCollection" do
+      before(:each) do
+        @collection = Size.all
+      end
+      describe "#hash_locale" do
+        it "should have as many top level elements as specified locales" do
+          n = 1
+          h = @collection.hash_locale([I18n::available_locales.first])
+          h.keys.count.should == n
+        end
+      end
+    end
+    
   end
 end

@@ -188,6 +188,32 @@ module IsoBsdI18n
       Hash[sizes.map{|s| [s.to_i, s.hash]}]
     end
 
+    # @param [Array] locales String array specifying locales to include
+    # @return [Hash] The hash for each Size in the collection for each locale specified
+    def hash_locale(locales=nil)
+      orig_locale = I18n.locale
+      h = {}
+
+      if(locales.nil? || locales.empty?)
+        locales = I18n::available_locales
+      end
+
+      begin
+        locales.each do |l|
+          begin
+            if ! I18n.translate('isobsd', :raise => true, :locale => l).nil?
+              I18n.locale = l
+              h[l] = self.hash
+            end
+          rescue
+          end
+        end
+      ensure
+        I18n.locale = orig_locale
+      end
+      return h
+    end
+
     # Hash of structure
     # {size.bsd => size.diameter, ... }
     #
