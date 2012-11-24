@@ -161,8 +161,7 @@ module IsoBsdI18n
     # 
     # @return [Array]
     def sizes
-      @sizes ||= select_sizes(@list)
-      @sizes
+      select_sizes(@list)
     end
 
     def each

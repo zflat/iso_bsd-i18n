@@ -67,16 +67,15 @@ module IsoBsdI18n
 
       # @return [String] Translated rarity
       def to_s
-        return @str unless @str.nil?
-        
+        str = nil
         @division.hash.keys.each do |k|
           if self.send("#{k}?")
-            @str = I18n.translate("isobsd.rarity.#{k}")
+            str = I18n.translate("isobsd.rarity.#{k}")
           end
         end
-        @str ||= AttribNoData.new
+        str ||= AttribNoData.new
 
-        @str
+        return str
       end
 
       private 

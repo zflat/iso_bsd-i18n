@@ -88,7 +88,7 @@ module IsoBsdI18n
         
         it "should not have rarity that evaluates to rare or uncommon" do
           @sizes.first.rarity.should_not be_rare
-            @sizes.first.rarity.should_not be_uncommon
+          @sizes.first.rarity.should_not be_uncommon
         end
         
         it "should map to the 'common' label" do
