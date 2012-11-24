@@ -1,0 +1,177 @@
+es:
+  isobsd:
+    wheel: rueda
+    tire: neumático
+    messages:
+      :unknown: desconocido
+      :not_applicable: n/a
+    rarity:
+      :rare: raro
+      :common: común
+      :uncommon: nada frecuente
+    :sizes:
+      635:
+        :trad:
+          1: 28 x 1 1/2
+          2: 700 B
+        :app: frenos de varilla roadsters
+      630:
+        :trad: 27 x todo
+        :app: antiguas bicicletas de carretera
+      622:
+        :trad: 
+          1: 700 C
+          2: 28 x (dos fracciones)
+          3: 29 pulgada
+          4: 28 x 1 1/2 F.13 Canadá
+        :app: 
+          1: nuevo las bicicletas de carretera
+          2: 29er bicicletas de montaña
+      599:
+        :trad:
+          1: 26 x 1.25
+          2: 26 x 1.375
+        :app: muy viejos pesos ligeros de Estados Unidos
+      597:
+        :trad:
+          1: 26 x 1 1/4
+          2: 26 x 1 3/8 (S-6)
+        :app:
+          1: mayores deportes británicos y motos del Club
+          2: Schwinn pesos ligeros
+      590:
+        :trad:
+          1: 26 x 1 3/8 (E.A.3)
+          2: 650 A 
+        :app:
+          1: más inglés de 3 velocidades
+          2: grandes almacenes o menores velocidades de 10
+      587:
+        :trad: 700 D
+        :app: tamaño excéntrico utilizado anteriormente en algunos modelos GT
+      584:
+        :trad: 
+          1: 650 B
+          2: 26 x 1 1/2
+        :app: 
+          1: motos Francés de servicios públicos
+          2: tándems y cargado de gira
+          3: algunos mayores Raleigh
+          4: Schwinn bicicletas de montaña
+      571:
+        :trad: 
+          1: 26 x 1
+          2: 26 x 1 3/4
+          3: 650 C
+        :app: 
+          1: triatlón
+          2: tiempo de prueba
+          3: bicicletas de carretera de alto rendimiento para los pequeños jinetes
+      559:
+        :trad: 26 x 1.00- x 2.125 
+        :app: 
+          1: la mayoría de bicicletas de montaña
+          2: cruceros
+      547:
+        :trad: 
+          1: 24 x 1 1/4
+          2: 24 x 1 3/8 (S-5)
+        :app: 
+          1: British or Schwinn juvenile
+          2: Schwinn juvenile lightweights
+      540:
+        :trad: 
+          1: 24 x 1 1/8
+          2: 24 x 1 3/8 (E.5)
+          3: 600 A
+        :app: 
+          1: British juvenile
+          2: most wheelchairs
+      520:
+        :trad: 
+          1: 24 x 1
+          2: 24 x 1 1/8
+        :app: 
+          1: high performance wheels for smaller riders 
+          2: Terry front
+      507:
+        :trad: 24 x 1.5- x 2.125  
+        :app:
+          1: juevenile mountain bikes
+          2: cruisers
+      490:
+        :trad: 550 A 
+        :app: European Juvenile road bikes 
+      457:
+        :trad: 
+          1: 22 x 1.75
+          2: 22 x 2.125
+        :app: juvenile
+      451:
+        :trad: 
+          1: 20 x 1 1/8
+          2: 20 x 1 1/4
+          3: 20 x 1 3/8
+        :app: 
+          1: juevenile lightweights
+          2: BMX for light riders
+          3: some recumbents
+      440:
+        :trad: 500 A 
+        :app:  European Juvenile, folding 
+      419:
+        :trad: 20 x 1 3/4 
+        :app:  Schwinn juvenile 
+      406:
+        :trad: 20 x 1.5- x 2.125 
+        :app:  
+          0: most BMX
+          1: juevenile
+          2: folders
+          3: trailers
+          4: some recumbents
+      390:
+        :trad: 450 A 
+        :app: European Juvenile 
+      369:
+        :trad: 17 x 1 1/4 
+        :app:  Alex Moulton AM series 
+      355:
+        :trad: 18 x 1.5- x 2.125 
+        :app: 
+          1: Birdy folding bikes
+          2: juevenile
+      349:
+        :trad: 16 x 1 3/8 
+        :app:  
+          1: older Moulton
+          2: Brompton & other folders
+          3: recumbent front
+          4: juvenil
+      340:
+        :trad: 400 A
+        :app: European Juvenile 
+      337:
+        :trad: 16 x 1 3/8
+        :app:  Polish juvenile
+      317:
+        :trad: 16 x 1 3/4  
+        :app: Schwinn juvenile 
+      305:
+        :trad: 16 x 1.75- x 2.125 
+        :app: 
+          1: juevenile
+          2: folders
+          3: trailers
+          4: some recumbents
+      203:
+        :trad: 12 1/2 x anything
+        :app: 
+          1: juevenile
+          2: scooters
+      152:
+        :trad: 10 x 2
+        :app:  weelchair
+      137:
+        :trad: 8 x 1 1/4
+        :app:  wheelchair
