@@ -3,7 +3,7 @@ require_relative 'iso_bsd-i18n/size'
 require_relative 'iso_bsd-i18n/rarity'
 
 module IsoBsdI18n
-  VERSION = '0.1.0' unless defined?(VERSION)
+  VERSION = '0.1.1' unless defined?(VERSION)
 
   def IsoBsdI18n::init
     I18n.load_path << Dir[File.join(File.expand_path(File.dirname(__FILE__) + '/../locales'), '*.yml')]

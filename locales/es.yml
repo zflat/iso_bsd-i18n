@@ -2,6 +2,7 @@ es:
   isobsd:
     wheel: rueda
     tire: neumático
+    messages:
       :unknown: desconocido
       :not_applicable: n/a
     rarity:
