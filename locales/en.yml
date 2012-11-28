@@ -3,17 +3,8 @@ en:
     wheel: wheel
     tire: tire
     messages:
-      :unknown: unknown
+      :unknown: desconocido
       :not_applicable: n/a
-      :select_placeholder: select a wheel size
-      :search_requirements: please enter 2 or more characters
-      :search_no_found: no matches found
-      :full_list_link: see full list for more options
-      :header:
-        :iso: ISO value
-        :trad: traditional name
-        :app: application
-        :rarity: rarity
     rarity:
       :rare: rare
       :common: common
