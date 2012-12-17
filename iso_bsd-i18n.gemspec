@@ -1,6 +1,6 @@
 # encoding: utf-8
 $:.push File.expand_path("../lib", __FILE__)
-require 'iso_bsd-i18n'
+require 'iso_bsd-i18n/version'
 
 Gem::Specification.new do |s|
   s.name = %q{iso_bsd-i18n}
