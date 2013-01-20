@@ -23,5 +23,6 @@ pkg
 *~
 .#*
 *#
-#*.lock
+Gemfile.lock
+*.lock
 *.gem
