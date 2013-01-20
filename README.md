@@ -24,7 +24,7 @@ http://www.sheldonbrown.com/tire-sizing.html#isoetrto
 
         # SizeCollection of common sizes
         # (based on default rarity divisions)
-        c = IsoBsdI18n::Rarity::Division.new.common
+        c = IsoBsdI18n::Rarity::default_division.common
 
         my_divisions = {:common=>[bsd,..], :uncommon=>[bsd,..], :rare=>[bsd]}
         
