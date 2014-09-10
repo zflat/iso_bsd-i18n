@@ -1,3 +1,3 @@
 module IsoBsdI18n
-  VERSION = '0.2.0' unless defined?(VERSION)
+  VERSION = '1.0.0' unless defined?(VERSION)
 end
